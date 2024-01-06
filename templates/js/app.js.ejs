@@ -27,7 +27,7 @@ app.use(<%- use %>);
 <% }); -%>
 
 <% mounts.forEach(function (mount) { -%>
-app.use(<%= mount.path %>, <%- mount.code %>);
+app.use(<%- mount.path !== null ? `'${mount.path}', ` : '' %><%- mount.code %>);
 <% }); -%>
 
 <% if (view) { -%>

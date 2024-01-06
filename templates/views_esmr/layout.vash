@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta>
+  <title>@model.title</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script type='importmap'>@html.raw(model.importmap)</script>
+</head>
+<body>
+  @html.block('content')
+</body>
+</html>

@@ -26,7 +26,7 @@ var args = parseArgs(process.argv.slice(2), {
     H: 'hogan',
     v: 'view'
   },
-  boolean: ['ejs', 'force', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
+  boolean: ['ejs', 'force', 'esmr', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
   default: { css: true, view: true },
   string: ['css', 'view'],
   unknown: function (s) {
@@ -166,30 +166,31 @@ function createApplication (name, dir, options, done) {
     // Copy view templates
     mkdir(dir, 'views')
     pkg.dependencies['http-errors'] = '~1.7.2'
+    var viewsDir = options.esmr ? 'views_esmr' : 'views';
     switch (options.view) {
       case 'dust':
-        copyTemplateMulti('views', dir + '/views', '*.dust')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.dust')
         break
       case 'ejs':
-        copyTemplateMulti('views', dir + '/views', '*.ejs')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.ejs')
         break
       case 'hbs':
-        copyTemplateMulti('views', dir + '/views', '*.hbs')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.hbs')
         break
       case 'hjs':
-        copyTemplateMulti('views', dir + '/views', '*.hjs')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.hjs')
         break
       case 'jade':
-        copyTemplateMulti('views', dir + '/views', '*.jade')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.jade')
         break
       case 'pug':
-        copyTemplateMulti('views', dir + '/views', '*.pug')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.pug')
         break
       case 'twig':
-        copyTemplateMulti('views', dir + '/views', '*.twig')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.twig')
         break
       case 'vash':
-        copyTemplateMulti('views', dir + '/views', '*.vash')
+        copyTemplateMulti(viewsDir, dir + '/views', '*.vash')
         break
     }
   } else {
@@ -219,6 +220,13 @@ function createApplication (name, dir, options, done) {
       app.locals.uses.push("stylus.middleware(path.join(__dirname, 'public'))")
       pkg.dependencies.stylus = '0.54.5'
       break
+  }
+
+  // ESM router mount
+  if (options.esmr) {
+    pkg.dependencies.esmrouter = '~1.0.0'
+    app.locals.localModules.modulesRouter = './routes/node_modules'
+    app.locals.mounts.push({ path: null, code: 'modulesRouter' })
   }
 
   // Index router mount
@@ -274,6 +282,10 @@ function createApplication (name, dir, options, done) {
 
   // Static files
   app.locals.uses.push("express.static(path.join(__dirname, 'public'))")
+
+  if (options.esmr) {
+    copyTemplate('js/routes/node_modules.js', path.join(dir, 'routes/node_modules.js'))
+  }
 
   if (options.git) {
     copyTemplate('js/gitignore', path.join(dir, '.gitignore'))
@@ -520,6 +532,7 @@ function usage () {
   console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)')
   console.log('        --no-view        use static html instead of view engine')
   console.log('    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
+  console.log('        --esmr           add esmrouter (make browser-enabled npm packages available client side)')
   console.log('        --git            add .gitignore')
   console.log('    -f, --force          force on non-empty directory')
   console.log('    --version            output the version number')

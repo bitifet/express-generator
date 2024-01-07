@@ -284,7 +284,7 @@ function createApplication (name, dir, options, done) {
   app.locals.uses.push("express.static(path.join(__dirname, 'public'))")
 
   if (options.esmr) {
-    copyTemplate('js/routes/node_modules.js', path.join(dir, 'routes/node_modules.js'))
+    copyTemplate('js/routes_esmr/node_modules.js', path.join(dir, 'routes/node_modules.js'))
   }
 
   if (options.git) {

@@ -165,7 +165,7 @@ function createApplication (name, dir, options, done) {
   if (options.view) {
     // Copy view templates
     mkdir(dir, 'views')
-    pkg.dependencies['http-errors'] = '~1.7.2'
+    pkg.dependencies['http-errors'] = '~2.0.0'
     var viewsDir = options.esmr ? 'views_esmr' : 'views';
     switch (options.view) {
       case 'dust':

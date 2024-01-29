@@ -99,7 +99,7 @@ function createApplication (name, dir, options, done) {
     },
     dependencies: {
       debug: '~2.6.9',
-      express: '~4.17.1'
+      express: '~4.18.2'
     }
   }
 
@@ -213,7 +213,7 @@ function createApplication (name, dir, options, done) {
     case 'sass':
       app.locals.modules.sassMiddleware = 'node-sass-middleware'
       app.locals.uses.push("sassMiddleware({\n  src: path.join(__dirname, 'public'),\n  dest: path.join(__dirname, 'public'),\n  indentedSyntax: true, // true = .sass and false = .scss\n  sourceMap: true\n})")
-      pkg.dependencies['node-sass-middleware'] = '^1.1.0'
+      pkg.dependencies['node-sass-middleware'] = '~1.1.0'
       break
     case 'stylus':
       app.locals.modules.stylus = 'stylus'

@@ -98,7 +98,7 @@ function createApplication (name, dir, options, done) {
       start: 'node ./bin/www'
     },
     dependencies: {
-      debug: '~2.6.9',
+      debug: '~4.3.4',
       express: '~4.18.2'
     }
   }
@@ -128,7 +128,7 @@ function createApplication (name, dir, options, done) {
   // Cookie parser
   app.locals.modules.cookieParser = 'cookie-parser'
   app.locals.uses.push('cookieParser()')
-  pkg.dependencies['cookie-parser'] = '~1.4.5'
+  pkg.dependencies['cookie-parser'] = '~1.4.6'
 
   if (dir !== '.') {
     mkdir(dir, '.')

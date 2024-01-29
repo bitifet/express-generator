@@ -47,6 +47,7 @@ This generator can also be further configured with the following command line fl
     -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
         --no-view        use static html instead of view engine
     -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --esmr           add esmrouter (make browser-enabled npm packages available client side)
         --git            add .gitignore
     -f, --force          force on non-empty directory
     -h, --help           output usage information

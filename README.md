@@ -1,4 +1,4 @@
-[![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
+[![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)gen](http://expressjs.com/)
 
 [Express'](https://www.npmjs.com/package/express) application generator.
 
@@ -6,6 +6,19 @@
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build][github-actions-ci-image]][github-actions-ci-url]
 [![Windows Build][appveyor-image]][appveyor-url]
+
+<!-- (Syntax highlighting issue breaker (Sorry)) []() -->
+
+## Dev Note
+
+This is a modified version of [Express Generator](https://github.com/express/generator).
+...
+
+－－－－－－－－－－－－－－－－－－
+ＴＯ  ＢＥ  ＣＯＮＴＩＮＵＥＤ．．．
+NOTE: Also link new [TO-DO List](./TODO.md)
+－－－－－－－－－－－－－－－－－－
+
 
 ## Installation
 

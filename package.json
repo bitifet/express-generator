@@ -1,5 +1,5 @@
 {
-  "name": "express-generator",
+  "name": "expressgen",
   "description": "Express' application generator",
   "version": "4.16.1",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
@@ -22,7 +22,7 @@
     "app",
     "api"
   ],
-  "repository": "expressjs/generator",
+  "repository": "bitifet/express-generator",
   "license": "MIT",
   "dependencies": {
     "ejs": "2.6.2",
@@ -34,7 +34,7 @@
   "main": "bin/express-cli.js",
   "preferGlobal": true,
   "bin": {
-    "express": "./bin/express-cli.js"
+    "expressgen": "./bin/express-cli.js"
   },
   "devDependencies": {
     "eslint": "7.32.0",

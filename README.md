@@ -11,13 +11,31 @@
 
 ## Dev Note
 
-This is a modified version of [Express Generator](https://github.com/express/generator).
-...
+This is a modified version of [Express
+Generator](https://github.com/express/generator) which is nowadays highly
+outdated.
 
-－－－－－－－－－－－－－－－－－－
-ＴＯ  ＢＥ  ＣＯＮＴＩＮＵＥＤ．．．
-NOTE: Also link new [TO-DO List](./TODO.md)
-－－－－－－－－－－－－－－－－－－
+There are already several forks of it out there.
+
+The aim (or one of its) of this new fork is to catch the attention of the other
+forks authors in order to join our efforts in a single package.
+
+> 📌 **If you are the author of one of these forks (or plan to create a new one),
+> PLEASE contact me and I'll give you access to this repository.**
+> 
+> I'm not an experienced maintainer neither have a lot of time to invest in it.
+> But hopefully we could keep this useful tool more updated.
+
+### Name change
+
+To break the "express-generatorX" sequence, I renamed it 'expressgen' which, in
+turn, will be more handy to be used as 'npx expressgen'.
+
+### Goals
+
+You can find my inital goals in the [TO-DO List](./TODO.md) I added to the project.
+
+Please feel free to suggest/add your own ones.
 
 
 ## Installation

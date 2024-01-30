@@ -488,9 +488,7 @@ function main (options, done) {
 
     // Default view engine
     if (options.view === true) {
-      warning('the default view engine will not be jade in future releases\n' +
-        "use `--view=jade' or `--help' for additional options")
-      options.view = 'jade'
+      options.view = 'pug'
     }
 
     // Generate application
@@ -540,7 +538,7 @@ function usage () {
   console.log('        --pug            add pug engine support')
   console.log('        --hbs            add handlebars engine support')
   console.log('    -H, --hogan          add hogan.js engine support')
-  console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)')
+  console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to pug)')
   console.log('        --no-view        use static html instead of view engine')
   console.log('    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
   console.log('        --esmr           add esmrouter (make browser-enabled npm packages available client side)')

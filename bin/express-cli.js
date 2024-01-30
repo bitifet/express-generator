@@ -89,6 +89,13 @@ function copyTemplateMulti (fromDir, toDir, nameGlob) {
 function createApplication (name, dir, options, done) {
   console.log()
 
+  // Nodemon extension list:
+  var extension_list = [
+    "pug", "ejs", "less", "sass", "scss", "styl", "js", "html", "dust", "hbs",
+    "hjs", "jade", "twig", "vash", "json",
+  ];
+  if (typeof options.css !== "string") extension_list.push("css");
+
   // Package
   var pkg = {
     name: name,
@@ -96,7 +103,7 @@ function createApplication (name, dir, options, done) {
     private: true,
     scripts: {
       start: 'node ./bin/www',
-      dev: 'nodemon ./bin/www --ext pug,ejs,less,sass,scss,styl,js,html,dust,hbs,hjs,jade,twig,vash,css,json',
+      dev: `nodemon ./bin/www --ext ${extension_list.join(",")}`,
     },
     dependencies: {
       debug: '~4.3.4',

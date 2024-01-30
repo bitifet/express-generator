@@ -13,7 +13,7 @@ var validateNpmName = require('validate-npm-package-name')
 
 var APP_START_STOP_TIMEOUT = 10000
 var PKG_PATH = path.resolve(__dirname, '..', 'package.json')
-var BIN_PATH = path.resolve(path.dirname(PKG_PATH), require(PKG_PATH).bin.express)
+var BIN_PATH = path.resolve(path.dirname(PKG_PATH), require(PKG_PATH).bin.expressgen)
 var NPM_INSTALL_TIMEOUT = 300000 // 5 minutes
 var STDERR_MAX_BUFFER = 5 * 1024 * 1024 // 5mb
 var TEMP_DIR = utils.tmpDir()
@@ -38,12 +38,6 @@ describe('express(1)', function () {
       })
     })
 
-    it('should print jade view warning', function () {
-      assert.ok(ctx.warnings.some(function (warn) {
-        return warn === 'the default view engine will not be jade in future releases\nuse `--view=jade\' or `--help\' for additional options'
-      }))
-    })
-
     it('should provide debug instructions', function () {
       assert.ok(/DEBUG=express-1-no-args:\* (?:& )?npm start/.test(ctx.stdout))
     })
@@ -54,10 +48,10 @@ describe('express(1)', function () {
       assert.notStrictEqual(ctx.files.indexOf('package.json'), -1)
     })
 
-    it('should have jade templates', function () {
-      assert.notStrictEqual(ctx.files.indexOf('views/error.jade'), -1)
-      assert.notStrictEqual(ctx.files.indexOf('views/index.jade'), -1)
-      assert.notStrictEqual(ctx.files.indexOf('views/layout.jade'), -1)
+    it('should have pug templates', function () {
+      assert.notStrictEqual(ctx.files.indexOf('views/error.pug'), -1)
+      assert.notStrictEqual(ctx.files.indexOf('views/index.pug'), -1)
+      assert.notStrictEqual(ctx.files.indexOf('views/layout.pug'), -1)
     })
 
     it('should have a package.json file', function () {
@@ -68,15 +62,19 @@ describe('express(1)', function () {
         '  "version": "0.0.0",\n' +
         '  "private": true,\n' +
         '  "scripts": {\n' +
-        '    "start": "node ./bin/www"\n' +
+        '    "start": "node ./bin/www",\n' +
+        '    "dev": "nodemon ./bin/www --ext pug,ejs,less,sass,scss,styl,js,html,dust,hbs,hjs,jade,twig,vash,json,css"\n' +
         '  },\n' +
         '  "dependencies": {\n' +
         '    "cookie-parser": "~1.4.6",\n' +
         '    "debug": "~4.3.4",\n' +
         '    "express": "~4.18.2",\n' +
         '    "http-errors": "~2.0.0",\n' +
-        '    "jade": "~1.11.0",\n' +
-        '    "morgan": "~1.10.0"\n' +
+        '    "morgan": "~1.10.0",\n' +
+        '    "pug": "~3.0.2"\n' +
+        '  },\n' +
+        '  "devDependencies": {\n' +
+        '    "nodemon": "^3.0.3"\n' +
         '  }\n' +
         '}\n')
     })
@@ -225,10 +223,10 @@ describe('express(1)', function () {
       assert.notStrictEqual(ctx.files.indexOf('foo/package.json'), -1)
     })
 
-    it('should have jade templates', function () {
-      assert.notStrictEqual(ctx.files.indexOf('foo/views/error.jade'), -1)
-      assert.notStrictEqual(ctx.files.indexOf('foo/views/index.jade'), -1)
-      assert.notStrictEqual(ctx.files.indexOf('foo/views/layout.jade'), -1)
+    it('should have pug templates', function () {
+      assert.notStrictEqual(ctx.files.indexOf('foo/views/error.pug'), -1)
+      assert.notStrictEqual(ctx.files.indexOf('foo/views/index.pug'), -1)
+      assert.notStrictEqual(ctx.files.indexOf('foo/views/layout.pug'), -1)
     })
   })
 
@@ -506,10 +504,10 @@ describe('express(1)', function () {
       assert.notStrictEqual(ctx.files.indexOf('.gitignore'), -1, 'should have .gitignore file')
     })
 
-    it('should have jade templates', function () {
-      assert.notStrictEqual(ctx.files.indexOf('views/error.jade'), -1)
-      assert.notStrictEqual(ctx.files.indexOf('views/index.jade'), -1)
-      assert.notStrictEqual(ctx.files.indexOf('views/layout.jade'), -1)
+    it('should have pug templates', function () {
+      assert.notStrictEqual(ctx.files.indexOf('views/error.pug'), -1)
+      assert.notStrictEqual(ctx.files.indexOf('views/index.pug'), -1)
+      assert.notStrictEqual(ctx.files.indexOf('views/layout.pug'), -1)
     })
   })
 

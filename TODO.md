@@ -1,6 +1,5 @@
 # ExpressGen TO-DO List
 
-
 ## Improvements
 
 ### New Name
@@ -18,14 +17,14 @@ we could just execute `npx expressgen`.
 
 This change involves:
 
-  * Updating package.json changing the package name and updating the *bin*
+  * [x] Updating package.json changing the package name and updating the *bin*
     section.
 
-  * Update README.md to document usage through npx.
+  * [x] Update README.md to document usage through npx.
 
 ### Incorporate nodemon
 
-  * (Idea borrowed from [TheOfficialDev-ops'
+  * [x] (Idea borrowed from [TheOfficialDev-ops'
     fork](https://github.com/TheOfficialDev-ops/express-generator3) of
     express-generator).
 
@@ -34,19 +33,19 @@ This change involves:
 
 ### Move to Pug
 
-  * Make pug its default template engine.
+  * [x] Make pug its default template engine.
 
-  * Definitely deprecate Jade.
+  * [ ] Definitely deprecate Jade.
     - Since its only the precursor of pug there is no reason to use it in new
       projects.
 
 ### Upgrade coding styles
 
-  * Begin migration to modern variable declarations (const, let...) where
+  * [ ] Begin migration to modern variable declarations (const, let...) where
     applicable.
 
 ### Upgrade other optional libs
 
-  * Just to provide newer versions (I'll only check existing tests keep
+  * [ ] Just to provide newer versions (I'll only check existing tests keep
     passing).
 

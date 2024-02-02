@@ -28,7 +28,7 @@
     (`--esmr` flag) to transparently make available [browser-enabled NPM
     packages](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#browser)
     client side.
-  * 👉 Even easier usage: Ex.: `npx expressgen --esmr -c sass myApp` (Create an
+  * 👉 Even easier usage: Ex.: `npx xprgen --esmr -c sass myApp` (Create an
     Express App with [Pug](https://pugjs.org), [SaSS](https://sass-lang.com/)
     and [ESMrouter](https://www.npmjs.com/package/esmrouter).
 
@@ -36,7 +36,7 @@
 ## Quick Start
 
 The quickest way to get started with express is to utilize the executable
-`expressgen` through [npx](https://www.npmjs.com/package/npx) to generate an
+`xprgen` through [npx](https://www.npmjs.com/package/npx) to generate an
 application as shown below:
 
 
@@ -45,7 +45,7 @@ application as shown below:
 > If you prefer, you can install it locally using the following command:
 > 
 > ```sh
-> $ npm install -g expressgen
+> $ npm install -g xprgen
 > ```
 > 
 > To execute it locally, you'll have to omit the initial `npx` command at the
@@ -55,7 +55,7 @@ application as shown below:
 Create the app:
 
 ```bash
-$ npx expressgen /tmp/foo && cd /tmp/foo
+$ npx xprgen /tmp/foo && cd /tmp/foo
 ```
 
 Install dependencies:
@@ -110,8 +110,8 @@ forks authors in order to join our efforts in a single package.
 
 ### Name change
 
-To break the "express-generatorX" sequence, I renamed it 'expressgen' which, in
-turn, will be more handy to be used as 'npx expressgen'.
+To break the "express-generatorX" sequence, I renamed it 'xprgen' which, in
+turn, will be more handy to be used as 'npx xprgen'.
 
 ### Goals
 
@@ -134,11 +134,11 @@ happen), I'll start versioning from next major number (5.0.0) and so on...
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/expressgen.svg
-[npm-url]: https://npmjs.org/package/expressgen
+[npm-image]: https://img.shields.io/npm/v/xprgen.svg
+[npm-url]: https://npmjs.org/package/xprgen
 [appveyor-image]: https://img.shields.io/appveyor/ci/dougwilson/generator/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/dougwilson/generator
-[downloads-image]: https://img.shields.io/npm/dm/expressgen.svg
-[downloads-url]: https://npmjs.org/package/expressgen
+[downloads-image]: https://img.shields.io/npm/dm/xprgen.svg
+[downloads-url]: https://npmjs.org/package/xprgen
 [github-actions-ci-image]: https://img.shields.io/github/workflow/status/expressjs/generator/ci/master?label=linux
 [github-actions-ci-url]: https://github.com/expressjs/generator/actions/workflows/ci.yml

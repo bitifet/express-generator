@@ -1,4 +1,4 @@
-# ExpressGen TO-DO List
+# xprgen TO-DO List
 
 ## Improvements
 
@@ -11,9 +11,9 @@ goals to make a wider upgrade to this wonderful (but highly outdated) tool.
 Since express-generator2 and 3 are already taken, adding an
 "express-generator4" to the list wouldn't make much sense.
 
-So I finally decided to call it 'expressgen' which will also be more handy for
-using through npx so that instead of `npm install -g expressgen && expressgen`
-we could just execute `npx expressgen`.
+So I finally decided to call it 'xprgen' which will also be more handy for
+using through npx so that instead of `npm install -g xprgen && xprgen`
+we could just execute `npx xprgen`.
 
 This change involves:
 

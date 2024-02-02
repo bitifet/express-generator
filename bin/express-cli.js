@@ -530,7 +530,7 @@ function mkdir (base, dir) {
 
 function usage () {
   console.log('')
-  console.log('  Usage: express [options] [dir]')
+  console.log('  Usage: xprgen [options] [dir]')
   console.log('')
   console.log('  Options:')
   console.log('')

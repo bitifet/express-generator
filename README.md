@@ -2,7 +2,7 @@
 
 **Updated** [Express'](https://www.npmjs.com/package/express) application generator.
 
-👉 [Up to date](#dev-note) *express-generator* with [new features](new-features).
+👉 [Up to date](#dev-notes) *express-generator* with [new features](#new-features).
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
@@ -13,10 +13,10 @@
 
 
 > 📌 This is a modified version of [Express
-> Generator](https://github.com/express/generator) which is nowadays highly
+> Generator](https://github.com/expressjs/generator) which is nowadays highly
 > outdated.
 > 
-> For more details see [Dev Notes](dev-notes) below...
+> For more details see [Dev Notes](#dev-notes) below...
 
 ## New features
 
@@ -115,7 +115,7 @@ turn, will be more handy to be used as 'npx xprgen'.
 
 ### Goals
 
-Additionally to those already implemented (see [New features](new-features)
+Additionally to those already implemented (see [New features](#new-features)
 section), you can find my inital goals in the [TO-DO List](./TODO.md) I added
 to the project.
 

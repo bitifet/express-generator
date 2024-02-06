@@ -28,6 +28,8 @@ This change involves:
     fork](https://github.com/TheOfficialDev-ops/express-generator3) of
     express-generator).
 
+  * [ ] Update initial hint from suggesting `$DEBUG=appName:* npm start` to suggest `$DEBUG=appName:* npm run dev` for development and `npm start -- production` for production.
+
 
 ## Upgrades
 

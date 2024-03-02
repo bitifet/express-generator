@@ -39,7 +39,7 @@ describe('express(1)', function () {
     })
 
     it('should provide debug instructions', function () {
-      assert.ok(/DEBUG=express-1-no-args:\* (?:& )?npm start/.test(ctx.stdout))
+      assert.ok(/DEBUG=express-1-no-args:\* (?:& )?npm run dev/.test(ctx.stdout))
     })
 
     it('should have basic files', function () {
@@ -214,7 +214,7 @@ describe('express(1)', function () {
     })
 
     it('should provide debug instructions', function () {
-      assert.ok(/DEBUG=foo:\* (?:& )?npm start/.test(ctx.stdout))
+      assert.ok(/DEBUG=foo:\* (?:& )?npm run dev/.test(ctx.stdout))
     })
 
     it('should have basic files', function () {

@@ -326,9 +326,11 @@ function createApplication (name, dir, options, done) {
   console.log('   run the app:')
 
   if (launchedFromCmd()) {
-    console.log('     %s SET DEBUG=%s:* & npm start', prompt, name)
+    console.log('     DEVELOPMENT: %s SET DEBUG=%s:* & npm run dev', prompt, name)
+    console.log('     PRODUCTION:  %s SET & npm start', prompt)
   } else {
-    console.log('     %s DEBUG=%s:* npm start', prompt, name)
+    console.log('     DEVELOPMENT: %s DEBUG=%s:* npm run dev', prompt, name)
+    console.log('     PRODUCTION:  %s npm start', prompt)
   }
 
   console.log()

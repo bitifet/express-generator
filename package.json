@@ -29,7 +29,8 @@
     "minimatch": "^3.1.2",
     "minimist": "^1.2.8",
     "mkdirp": "^0.5.6",
-    "sorted-object": "2.0.1"
+    "sorted-object": "2.0.1",
+    "sync-request": "^6.1.0"
   },
   "main": "bin/express-cli.js",
   "preferGlobal": true,

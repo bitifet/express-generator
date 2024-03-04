@@ -31,6 +31,12 @@
   * 👉 Even easier usage: Ex.: `npx xprgen --esmr -c sass myApp` (Create an
     Express App with [Pug](https://pugjs.org), [SaSS](https://sass-lang.com/)
     and [ESMrouter](https://www.npmjs.com/package/esmrouter).
+  * 👉 Dependencies preinstallation. Ex: `npx xprgen --esmr -i smarkform myApp`.
+    - Even for multiple packages. Ex: `npx xprgen --esmr -i "smarkform sqltt chalk" myApp`.
+    - Also possible with devDependencies. Ex: `npx xprgen -i sqltt -d mocha`.
+    - Guesses version as current 'latest' tag prefixed whith caret (likewise `npm install`).
+    - ...but can be overridden. Ex: `npx xprgen -i "node-sass@^4.1.0"`.
+
 
 
 ## Quick Start
@@ -81,18 +87,20 @@ $ npm run dev
 This generator can also be further configured with the following command line flags.
 
 ```
-        --version        output the version number
-    -e, --ejs            add ejs engine support
-        --pug            add pug engine support
-        --hbs            add handlebars engine support
-    -H, --hogan          add hogan.js engine support
-    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to pug)
-        --no-view        use static html instead of view engine
-    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-        --esmr           add esmrouter (make browser-enabled npm packages available client side)
-        --git            add .gitignore
-    -f, --force          force on non-empty directory
-    -h, --help           output usage information
+        --version           output the version number
+    -e, --ejs               add ejs engine support
+        --pug               add pug engine support
+        --hbs               add handlebars engine support
+    -H, --hogan             add hogan.js engine support
+    -v, --view <engine>     add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to pug)
+        --no-view           use static html instead of view engine
+    -c, --css <engine>      add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+        --esmr              add esmrouter (make browser-enabled npm packages available client side)
+        --git               add .gitignore
+    -i  --install <pkgs>    add specified pkgs as dependencies. Can be specified multiple times or as space-separated string. Accept optional @version spec.
+    -d  --devInstall <pkgs> like --install but for devDependencies
+    -f, --force             force on non-empty directory
+    -h, --help              output usage information
 ```
 
 ## Dev Notes

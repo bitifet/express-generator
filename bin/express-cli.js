@@ -9,6 +9,7 @@ var path = require('path')
 var readline = require('readline')
 var sortedObject = require('sorted-object')
 var util = require('util')
+const requestSync = require('sync-request');
 
 var MODE_0666 = parseInt('0666', 8)
 var MODE_0755 = parseInt('0755', 8)
@@ -24,11 +25,13 @@ var args = parseArgs(process.argv.slice(2), {
     f: 'force',
     h: 'help',
     H: 'hogan',
-    v: 'view'
+    v: 'view',
+    i: 'install',
+    d: 'devInstall'
   },
   boolean: ['ejs', 'force', 'esmr', 'git', 'hbs', 'help', 'hogan', 'pug', 'version'],
   default: { css: true, view: true },
-  string: ['css', 'view'],
+  string: ['css', 'view', 'install', 'devInstall'],
   unknown: function (s) {
     if (s.charAt(0) === '-') {
       unknown.push(s)
@@ -76,6 +79,72 @@ function copyTemplateMulti (fromDir, toDir, nameGlob) {
       copyTemplate(path.join(fromDir, name), path.join(toDir, name))
     })
 }
+
+/**
+ * Convert package list to dependencies object
+ *
+ * @pkgSpec {string or array} one or more package name or name@version strings.
+ */
+
+const parsePackageSpec = (()=>{
+
+  const fetchPkg = pkgName => JSON.parse( // This may throw...
+      requestSync('GET', `https://registry.npmjs.org/${pkgName}`).getBody('utf8')
+  );
+
+  function resolvePkgVersion(pkgName) {
+    const pkg0 = pkgName;
+    let pkgVersion = "latest";
+    pkgName = pkgName.trim();
+    const atPos = pkgName.indexOf("@", 1); // Respect @scope/ spec.
+    if (atPos >= 0) { // Version explicitly specified.
+      if (atPos < pkgName.length - 1) pkgVersion = pkgName.substring(atPos + 1);
+      pkgName = pkgName.substring(0, atPos);
+    } else { // Version not specified.
+      // Attempt to set to latest version at the time
+      try {
+        const {"dist-tags": {latest}} = fetchPkg(pkgName);
+        pkgVersion = `^${latest}`;
+      } catch (error) {
+        console.log('   \x1b[33mwarning\x1b[0m : ' + `Failed to get the latest ${pkgName} version. Defaulting to '@latest'`);
+      }
+    };
+    if (
+        pkgVersion != "latest"
+        && atPos >= 0 // Version was explicitly specified.
+    ) {
+      // Attempt to verify specified version
+      try {
+        const {versions} = fetchPkg(pkgName);
+        if (
+          ! ("^~".indexOf(pkgVersion[0]) + 1) // Not a range
+          && Object.keys(versions).indexOf(pkgVersion) < 0
+        ) console.log(
+          '   \x1b[31merror\x1b[0m : '
+          + `Package ${pkgName} has no ${pkgVersion} version.`
+        );
+      } catch (error) {
+        console.log(
+          '   \x1b[33mwarning\x1b[0m : '
+          + `Could not verify ${pkgName} version.`
+        );
+      }
+    };
+    return [pkgName, pkgVersion];
+  }
+
+  return function packageSpecParser(pkgSpec) {
+    const pkgList = (
+      pkgSpec instanceof Array ? pkgSpec // Modifier specified multiple times.
+      : [pkgSpec] // Modifier specified single time.
+    )
+      .map(pkg=>pkg.split(/\s+/g)).flat() // Allow for (quoted) space-separated list.
+      .map(resolvePkgVersion) // Attempt to emulate 'npm install'
+    ;
+    return Object.fromEntries(pkgList);
+  };
+
+})();
 
 /**
  * Create application at the given directory.
@@ -307,6 +376,21 @@ function createApplication (name, dir, options, done) {
 
   // write files
   write(path.join(dir, 'app.js'), app.render())
+
+  // Preinstall additional packages
+  if (options.install) {
+      pkg.dependencies = {
+        ...pkg.dependencies,
+        ...parsePackageSpec(options.install),
+      };
+  }
+  if (options.devInstall) {
+      pkg.devDependencies = {
+        ...pkg.devDependencies,
+        ...parsePackageSpec(options.devInstall),
+      };
+  }
+
   write(path.join(dir, 'package.json'), JSON.stringify(pkg, null, 2) + '\n')
   mkdir(dir, 'bin')
   write(path.join(dir, 'bin/www'), www.render(), MODE_0755)
@@ -536,18 +620,20 @@ function usage () {
   console.log('')
   console.log('  Options:')
   console.log('')
-  console.log('    -e, --ejs            add ejs engine support')
-  console.log('        --pug            add pug engine support')
-  console.log('        --hbs            add handlebars engine support')
-  console.log('    -H, --hogan          add hogan.js engine support')
-  console.log('    -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to pug)')
-  console.log('        --no-view        use static html instead of view engine')
-  console.log('    -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
-  console.log('        --esmr           add esmrouter (make browser-enabled npm packages available client side)')
-  console.log('        --git            add .gitignore')
-  console.log('    -f, --force          force on non-empty directory')
-  console.log('    --version            output the version number')
-  console.log('    -h, --help           output usage information')
+  console.log('    -e, --ejs               add ejs engine support')
+  console.log('        --pug               add pug engine support')
+  console.log('        --hbs               add handlebars engine support')
+  console.log('    -H, --hogan             add hogan.js engine support')
+  console.log('    -v, --view <engine>     add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to pug)')
+  console.log('        --no-view           use static html instead of view engine')
+  console.log('    -c, --css <engine>      add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
+  console.log('        --esmr              add esmrouter (make browser-enabled npm packages available client side)')
+  console.log('        --git               add .gitignore')
+  console.log('    -i  --install <pkgs>    add specified pkgs as dependencies. Can be specified multiple times or as space-separated string. Accept optional @version spec.')
+  console.log('    -d  --devInstall <pkgs> like --install but for devDependencies')
+  console.log('    -f, --force             force on non-empty directory')
+  console.log('    --version               output the version number')
+  console.log('    -h, --help              output usage information')
 }
 
 /**

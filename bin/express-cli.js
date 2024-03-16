@@ -304,7 +304,7 @@ function createApplication (name, dir, options, done) {
 
   // ESM router mount
   if (options.esmr) {
-    pkg.dependencies.esmrouter = '~1.0.0'
+    pkg.dependencies.esmrouter = '~1.1.0'
     app.locals.localModules.modulesRouter = './routes/node_modules'
     app.locals.mounts.push({ path: null, code: 'modulesRouter' })
   }

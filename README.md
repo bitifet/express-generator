@@ -39,6 +39,12 @@
 
 
 
+You can also run the application generator with the `npx` command (available since Node.js 8.2.0).
+
+```sh
+$ npx express-generator
+```
+
 ## Quick Start
 
 The quickest way to get started with express is to utilize the executable
